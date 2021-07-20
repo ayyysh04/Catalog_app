@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_catalog/pages/home_page.dart';
 import 'package:flutter_catalog/pages/login_page.dart';
+import 'package:flutter_catalog/utils/routes.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 void main() {
@@ -33,9 +34,15 @@ class MyApp extends StatelessWidget {
       // initialRoute: "/login", //This will make our first page/route login
       routes: {
         "/": (context) =>
-            HomePage(), //=> is short hand of defining fnc with return Homepage()
-        "/login": (context) =>
-            new LoginPage(), //new is used to create new objects of a class and new and without new is same as dart compiler automatically identifies it
+            LoginPage(), //=> is short hand of defining fnc with return Homepage()
+        // "/login": (context) =>
+        //     new LoginPage(), //new is used to create new objects of a class and new and without new is same as dart compiler automatically identifies it
+
+        //Above codes are hard coded here to use these routes for others we have make a seprate class Myroute and used them
+        MyRoutes.homeRoute: (context) => HomePage(),
+        MyRoutes.loginRoute: (context) => LoginPage(),
+        //Alos u can see we didnt have to make a obejct of class route ahd directly access through the class name
+        //This is because we have made the members static
       },
       //convention:
       //function : have () and starts with small letter and then captical letter can used
