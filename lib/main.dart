@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_catalog/pages/home_page.dart';
 import 'package:flutter_catalog/pages/login_page.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 void main() {
   //main fnc which is called first
@@ -23,10 +24,13 @@ class MyApp extends StatelessWidget {
       //home: HomePage(),//home or root route of our app
       //"/" route and home: cant be used together as they are same
       themeMode: ThemeMode.light,
-      theme: ThemeData(primarySwatch: Colors.deepPurple),
+      theme: ThemeData(
+        primarySwatch: Colors.deepPurple,
+        fontFamily: GoogleFonts.lato().fontFamily,
+      ),
       darkTheme: ThemeData(brightness: Brightness.dark),
-
       //For creating new pages in app
+      // initialRoute: "/login", //This will make our first page/route login
       routes: {
         "/": (context) =>
             HomePage(), //=> is short hand of defining fnc with return Homepage()

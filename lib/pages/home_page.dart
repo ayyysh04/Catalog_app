@@ -8,6 +8,8 @@ class HomePage extends StatelessWidget {
         title: Text("Catalog App"),
       ),
       body: Center(
+        //single widget inside wiget : child
+        //multiple widget inside wiget : children ,eg:row,coloumn,listview
         child: Container(
           child: Text("Welcome"),
         ),
