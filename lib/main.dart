@@ -21,7 +21,8 @@ class MyApp extends StatelessWidget {
   {
     return MaterialApp //we have to return an app (materialapp,cupertino app,widget app) before doing anything
         (
-      // debugShowCheckedModeBanner: false, //to disable debug symbol at corner (it will be automatically removed when app goes for production)
+      debugShowCheckedModeBanner:
+          false, //to disable debug symbol at corner (it will be automatically removed when app goes for production)
       //home: HomePage(),//home or root route of our app
       //"/" route and home: cant be used together as they are same
       themeMode: ThemeMode.light,
