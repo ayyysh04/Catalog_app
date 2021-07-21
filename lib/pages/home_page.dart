@@ -6,7 +6,14 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Catalog App"),
+        // backgroundColor: Colors.white,
+        // elevation: 0.0, //Removes the shadow below the appbar
+        // iconTheme: IconThemeData(color: Colors.black), //This makes all color ,styling,etc related to icons in appbar eg:drawer icon
+        ///We have made an seprate theme data in main.dart so that it can used everywhere in an easier manner
+        title: Text(
+          "Catalog App",
+          // style: TextStyle(color: Colors.black),
+        ),
       ),
       body: Center(
         //single widget inside wiget : child
