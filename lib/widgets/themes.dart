@@ -7,11 +7,14 @@ class MyTheme {
         primarySwatch: Colors.deepPurple,
         fontFamily: GoogleFonts.lato().fontFamily,
         appBarTheme: AppBarTheme(
-            color: Colors.white,
-            elevation: 0.0,
-            iconTheme: IconThemeData(color: Colors.black)),
-        textTheme: Theme.of(context)
-            .textTheme, //We can use theme.of(context) to use texttheme of app in our widgets
+          color: Colors.white,
+          elevation: 0.0,
+          iconTheme: IconThemeData(color: Colors.black),
+          textTheme: Theme.of(context)
+              .textTheme //We can use theme.of(context) to use texttheme of app in our widgets
+          ,
+        ),
+        // cardTheme: CardTheme(color: Colors.amber, shape: StadiumBorder())
       );
 
   static ThemeData darkTheme(BuildContext context) =>

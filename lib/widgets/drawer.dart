@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 
 class MyDrawer extends StatelessWidget {
   const MyDrawer({Key? key}) : super(key: key);
@@ -17,48 +18,59 @@ class MyDrawer extends StatelessWidget {
                 padding: EdgeInsets.zero,
                 child: UserAccountsDrawerHeader(
                     margin: EdgeInsets.zero,
-                    // decoration: BoxDecoration(color: Colors.red),
+                    decoration: BoxDecoration(color: Colors.black26),
                     accountName: Text("Ayush yadav"),
                     accountEmail: Text("ayushiit2003@gmail.com"),
                     currentAccountPicture: CircleAvatar(
                       backgroundImage: NetworkImage(imageUrl),
+                      radius: 200,
+
+                      ///This will not increase due to size from useraccountdrwaerheader
                     )
                     // Image.network(imageUrl): to get image from newtork ie from online
                     //Image.asset(name) : to get image from asset/from out own file
                     )),
-            ListTile(
-              leading: Icon(
-                CupertinoIcons.home,
-                color: Colors.white,
-              ),
-              title: Text(
-                "Home",
-                textScaleFactor: 1.2,
-                style: TextStyle(color: Colors.white),
-              ),
-            ),
-            ListTile(
-              leading: Icon(
-                CupertinoIcons.profile_circled,
-                color: Colors.white,
-              ),
-              title: Text(
-                "Profile",
-                textScaleFactor: 1.2,
-                style: TextStyle(color: Colors.white),
-              ),
-            ),
-            ListTile(
-              leading: Icon(
-                CupertinoIcons.mail,
-                color: Colors.white,
-              ),
-              title: Text(
-                "Email me",
-                textScaleFactor: 1.2,
-                style: TextStyle(color: Colors.white),
-              ),
-            )
+            Material(
+                color: Colors.transparent,
+                child: Column(
+                  children: [
+                    ListTile(
+                      leading: Icon(
+                        CupertinoIcons.home,
+                        color: Colors.white,
+                      ),
+                      title: Text(
+                        "Home",
+                        textScaleFactor: 1.2,
+                        style: TextStyle(color: Colors.white),
+                      ),
+                    ),
+                    ListTile(
+                      tileColor: Colors.redAccent,
+                      leading: Icon(
+                        CupertinoIcons.profile_circled,
+                        color: Colors.white,
+                      ),
+                      title: Text(
+                        "Profile",
+                        textScaleFactor: 1.2,
+                        style: TextStyle(color: Colors.white),
+                      ),
+                    ),
+                    ListTile(
+                      tileColor: Colors.blueGrey,
+                      leading: Icon(
+                        CupertinoIcons.mail,
+                        color: Colors.white,
+                      ),
+                      title: Text(
+                        "Email me",
+                        textScaleFactor: 1.2,
+                        style: TextStyle(color: Colors.white),
+                      ),
+                    )
+                  ],
+                )),
           ],
         ),
       ),
