@@ -33,7 +33,7 @@ class MyApp extends StatelessWidget {
       // initialRoute: "/login", //This will make our first page/route login
       routes: {
         "/": (context) =>
-            LoginPage(), //=> is short hand of defining fnc with return Homepage()
+            HomePage(), //=> is short hand of defining fnc with return Homepage()
         // "/login": (context) =>
         //     new LoginPage(), //new is used to create new objects of a class and new and without new is same as dart compiler automatically identifies it
 
