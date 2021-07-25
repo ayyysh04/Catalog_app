@@ -7,7 +7,7 @@ class ItemWidget extends StatelessWidget {
   const ItemWidget({Key? key, @required this.item})
       : assert(item !=
             null), //Assert is used to prevent the null value in item ,and can be removed when app is done for production
-        //Now we have null safter so there is not use of asserts now
+        //Now we have null saftery so there is not use of asserts now remove if u want
         super(key: key);
 
   @override

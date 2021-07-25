@@ -81,15 +81,71 @@ class _HomePageState extends State<HomePage> {
           Padding(
         padding: const EdgeInsets.all(16.0),
         child: (CatalogModel.items != null && CatalogModel.items!.isNotEmpty)
-            ? ListView
-                .builder //create a list and only render the list which are on screen when u scroll down the rendering of rest items starts
-                (
-                itemCount: CatalogModel.items!.length,
-                itemBuilder: (context, index) => ItemWidget
-                    //used short hand => ,instead of return
-                    (
-                  item: CatalogModel.items![index],
+            ?
+            //Using list view
+            //  ListView
+            //     .builder //create a list and only render the list which are on screen when u scroll down the rendering of rest items starts
+            //     (
+            //     itemCount: CatalogModel.items!.length,
+            //     itemBuilder: (context, index) => ItemWidget
+            //         //used short hand => instead of return
+            //         (
+            //       item: CatalogModel.items![index],
+            //     ),
+            //   )
+            //using grid view
+            GridView.builder(
+                //grid delegrate tels to builder that how many items should be there in row or coloumn
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  //crossaxix: horizontal axis
+                  //mainaxis : Vertical axis
+                  crossAxisCount: 2,
+                  mainAxisSpacing: 16,
+                  crossAxisSpacing: 16,
                 ),
+
+                itemBuilder: (context, index) {
+                  final item = CatalogModel.items![index];
+                  return Card(
+                    clipBehavior: Clip.antiAlias,
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10)),
+                    child: GridTile(
+                        header: Container(
+                          child: Text(
+                            item.name,
+                            style: TextStyle(color: Colors.white),
+                          ),
+                          decoration: BoxDecoration(
+                            color: Colors.deepPurple,
+                          ),
+                          padding: const EdgeInsets.all(
+                              12), //constant :make easier for compiler as it doesnt make the padding set agian again
+                        ),
+                        child: Container(
+                          child: Image.network(
+                            item.image,
+                          ),
+                          // margin: EdgeInsets.all(16.0),
+                          padding: EdgeInsets.symmetric(
+                            vertical: 50,
+                          ),
+                        ),
+                        footer: Container(
+                          child: Text(
+                            "\$${item.price.toString()}",
+                            textAlign: TextAlign.center,
+                            style: TextStyle(color: Colors.white),
+                          ),
+                          decoration: BoxDecoration(
+                            color: Colors.black,
+                          ),
+                          padding: const EdgeInsets.all(
+                              12), //constant :make easier for compiler as it doesnt make the padding set agian again
+                        )),
+                  );
+                },
+                itemCount: CatalogModel.items!.length,
               )
             : Center(child: CircularProgressIndicator()),
       ),
