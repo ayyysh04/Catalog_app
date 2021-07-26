@@ -52,7 +52,7 @@ class CatalogItem extends StatelessWidget {
                           StadiumBorder(),
                         ),
                       ),
-                      child: "Buy".text.make())
+                      child: "Add to cart".text.make())
                 ],
               ).pOnly(right: 8.0)
             ],
@@ -77,6 +77,8 @@ class Cataloglist extends StatelessWidget {
       itemBuilder: (context, index) {
         final catalog = CatalogModel.items![index];
         return InkWell(
+          //using navigator.push doesnt require us to define the route in main.dart/route and also we can pass argument in navigator to other page
+
           onTap: () => Navigator.push(
             context,
             MaterialPageRoute(

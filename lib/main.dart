@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_catalog/pages/cart_page.dart';
 import 'package:flutter_catalog/pages/home_page.dart';
 import 'package:flutter_catalog/pages/login_page.dart';
 import 'package:flutter_catalog/utils/routes.dart';
@@ -40,6 +41,7 @@ class MyApp extends StatelessWidget {
         //Above codes are hard coded here to use these routes for others we have make a seprate class Myroute and used them
         MyRoutes.homeRoute: (context) => HomePage(),
         MyRoutes.loginRoute: (context) => LoginPage(),
+        MyRoutes.cartRoute: (context) => CartPage(),
         //Alos u can see we didnt have to make a obejct of class route ahd directly access through the class name
         //This is because we have made the members static
       },

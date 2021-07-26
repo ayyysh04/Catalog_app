@@ -1,8 +1,10 @@
 import 'dart:convert';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_catalog/models/catalog.dart';
+import 'package:flutter_catalog/utils/routes.dart';
 import 'package:flutter_catalog/widgets/drawer.dart';
 import 'package:flutter_catalog/widgets/home_widgets/catalog_header.dart';
 import 'package:flutter_catalog/widgets/home_widgets/catalog_list.dart';
@@ -65,6 +67,16 @@ class _HomePageState extends State<HomePage> {
     //Used to see how if there were many items will see
     return Scaffold(
         backgroundColor: MyTheme.creamColor,
+        floatingActionButton: FloatingActionButton(
+          onPressed: () {
+            Navigator.pushNamed(
+                context,
+                MyRoutes
+                    .cartRoute); //using navigator.pushname requires us to define the route in main.dart/route and demerit we cannot pass argument in navigator to other page (alternate: use navigatir.push())
+          },
+          child: Icon(CupertinoIcons.cart),
+          backgroundColor: MyTheme.darkBluishColor,
+        ),
         // appBar: AppBar(
         //   // backgroundColor: Colors.white,
         //   // elevation: 0.0, //Removes the shadow below the appbar

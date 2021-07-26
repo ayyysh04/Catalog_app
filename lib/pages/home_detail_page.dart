@@ -12,7 +12,10 @@ class HomeDetailPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        title: Text(catalog!.name),
+      ),
       backgroundColor: MyTheme.creamColor,
       bottomNavigationBar: Container(
         color: Colors.white,
@@ -31,8 +34,8 @@ class HomeDetailPage extends StatelessWidget {
                         StadiumBorder(),
                       ),
                     ),
-                    child: "Buy".text.xl.make())
-                .wh(100, 50)
+                    child: "Add to cart".text.make())
+                .wh(120, 50)
           ],
         ).p32(),
       ),
@@ -55,20 +58,27 @@ class HomeDetailPage extends StatelessWidget {
                 child: Container(
                   color: Colors.white,
                   width: context.screenWidth,
-                  child: Column(
-                    children: [
-                      catalog!.name.text.xl4
-                          .color(MyTheme.darkBluishColor)
-                          .bold
-                          .make(),
-                      catalog!.desc.text
-                          .textStyle(context.captionStyle!)
-                          .xl
-                          .make(), //captionstyle makes the text loke like a caption text
-                      10.heightBox //Same as sized box with height 10
-                      ,
-                    ],
-                  ).py64(),
+                  child: SingleChildScrollView(
+                    child: Column(
+                      children: [
+                        catalog!.name.text.xl4
+                            .color(MyTheme.darkBluishColor)
+                            .bold
+                            .make(),
+
+                        catalog!.desc.text
+                            .textStyle(context.captionStyle!)
+                            .xl
+                            .make(), //captionstyle makes the text loke like a caption text
+                        10.heightBox, //Same as sized box with height 10
+                        "Sed ea diam sadipscing eirmod sed rebum kasd diam lorem stet. Takimata dolor labore vero voluptua amet sadipscing dolore sit, dolor dolor no diam diam, justo gubergren est no invidunt est kasd invidunt, amet invidunt lorem dolor invidunt, lorem et eos amet labore sanctus justo elitr, ipsum aliquyam dolor voluptua."
+                            .text
+                            .textStyle(context.captionStyle!)
+                            .make()
+                            .p16(),
+                      ],
+                    ).py64(),
+                  ),
                 ),
               ),
             )
