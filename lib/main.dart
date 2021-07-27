@@ -17,7 +17,7 @@ void main() {
 class MyApp extends StatelessWidget {
   //statelessWidget-widgets who state doesnt change
   //statefullWidget-widget whose state changes
-  @override //this method gets override and used by al
+  @override //this method gets override and used by all
   Widget build(BuildContext context) //build is method which return a widget
   //context specifies the location of our each widgets as there are storedd like tree/inside one in another
   {
@@ -27,14 +27,17 @@ class MyApp extends StatelessWidget {
           false, //to disable debug symbol at corner (it will be automatically removed when app goes for production)
       //home: HomePage(),//home or root route of our app
       //"/" route and home: cant be used together as they are same
-      themeMode: ThemeMode.light,
-      theme: MyTheme.lightTheme(context),
-      darkTheme: MyTheme.darkTheme(context),
+      themeMode: ThemeMode.system,
+      theme: MyTheme.lightTheme(
+          context), //Connects our whole app with light theme app data class
+      darkTheme: MyTheme.darkTheme(
+          context), //Connects our whole app with Dark theme app data class
+      //NOTE:ALL THE ICONS,TEXT,ETC WILL USE THIS APP DATA BYDEFAULT IF NO STYLE OR DATA IS PROVIDED THERE EXTERNALLY
       //For creating new pages in app
       // initialRoute: "/login", //This will make our first page/route login
       routes: {
         "/": (context) =>
-            HomePage(), //=> is short hand of defining fnc with return Homepage()
+            LoginPage(), //=> is short hand of defining fnc with return Homepage()
         // "/login": (context) =>
         //     new LoginPage(), //new is used to create new objects of a class and new and without new is same as dart compiler automatically identifies it
 

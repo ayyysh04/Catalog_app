@@ -11,7 +11,14 @@ class CatalogHeader extends StatelessWidget {
       children: [
         // "Catalog App".text.make(),//velocityx syntax
         // Text("Catalog App"),same as above
-        "Catalog App".text.xl5.bold.color(MyTheme.darkBluishColor).make(),
+        "Catalog App"
+            .text
+            .xl5
+            .bold
+            .color(context.theme.accentColor
+                // MyTheme.darkBluishColor
+                )
+            .make(),
         "Trending products".text.xl2.make(),
       ],
     );

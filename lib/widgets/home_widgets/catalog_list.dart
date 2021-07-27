@@ -30,7 +30,13 @@ class CatalogItem extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              catalog!.name.text.lg.color(MyTheme.darkBluishColor).bold.make(),
+              catalog!.name.text.lg
+                  .color(
+                    // MyTheme.darkBluishColor,
+                    context.accentColor,
+                  )
+                  .bold
+                  .make(),
               catalog!.desc.text
                   .textStyle(context.captionStyle!)
                   .make(), //captionstyle makes the text loke like a caption text
@@ -46,8 +52,11 @@ class CatalogItem extends StatelessWidget {
                       onPressed: () {},
                       style: ButtonStyle(
                         // elevation: MaterialStateProperty.all(0),
-                        backgroundColor:
-                            MaterialStateProperty.all(MyTheme.darkBluishColor),
+                        backgroundColor: MaterialStateProperty.all(
+                          // MyTheme.darkBluishColor,
+                          context.theme
+                              .buttonColor, //here context is used to access the themedata defined in Mytheme and replace with the current context(also called current theme) theme
+                        ),
                         shape: MaterialStateProperty.all(
                           StadiumBorder(),
                         ),
@@ -59,7 +68,13 @@ class CatalogItem extends StatelessWidget {
           ))
         ],
       ),
-    ).white.rounded.square(150).make().py16(); //vx box is similar to container
+    )
+        .color(context.cardColor)
+        // white
+        .rounded
+        .square(150)
+        .make()
+        .py16(); //vx box is similar to container
     //  .white.square(100).py16.make() //this will give padding inside the list
   }
 }

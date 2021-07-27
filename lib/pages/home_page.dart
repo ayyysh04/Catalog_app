@@ -66,7 +66,12 @@ class _HomePageState extends State<HomePage> {
     // final dummylist = List.generate(25,(index) => CatalogModel.items[0]); //This will generate adummylist of type item[0]
     //Used to see how if there were many items will see
     return Scaffold(
-        backgroundColor: MyTheme.creamColor,
+        backgroundColor: context.canvasColor,
+        // context.cardColor,
+        //context.cardColo same as Theme.of(context).cardColor,
+        //MyTheme.darkTheme(context).cardColor //This is also same as above but here we can only use dark theme context when we switch to light theme it will not get used
+
+        // MyTheme.creamColor,
         floatingActionButton: FloatingActionButton(
           onPressed: () {
             Navigator.pushNamed(
@@ -74,8 +79,13 @@ class _HomePageState extends State<HomePage> {
                 MyRoutes
                     .cartRoute); //using navigator.pushname requires us to define the route in main.dart/route and demerit we cannot pass argument in navigator to other page (alternate: use navigatir.push())
           },
-          child: Icon(CupertinoIcons.cart),
-          backgroundColor: MyTheme.darkBluishColor,
+          child: Icon(
+            CupertinoIcons.cart,
+            color: Colors.white,
+          ),
+          backgroundColor: context.theme.buttonColor,
+          // MyTheme.darkTheme(context).buttonColor,//same as context.theme.buttonColor (velocityx syntax)
+          // MyTheme.darkBluishColor,
         ),
         // appBar: AppBar(
         //   // backgroundColor: Colors.white,

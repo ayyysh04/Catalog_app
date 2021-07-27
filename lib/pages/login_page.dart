@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_catalog/utils/routes.dart';
+import 'package:velocity_x/velocity_x.dart';
 
 //class is a blueprint and copy of blueprint is object
 //We have made this class statefull as we are implemeting welcome+what user type in username
@@ -40,7 +41,8 @@ class _LoginPageState extends State<
   @override
   Widget build(BuildContext context) {
     return Material(
-      color: Colors.white,
+      color: context.canvasColor,
+      // Colors.white,
       //To avoid bottom overflow use singlechildscrollView widget over coloumn widget/any other widget
       child: SingleChildScrollView(
         child: Form //Form is used to group the input things like username ,password,address,etc and allow us to validate that using a key
@@ -125,11 +127,12 @@ class _LoginPageState extends State<
                     //   },
                     // )
                     //Now We will see animated button
-                    //two make a any widget clickable there are two methods:
+                    //to make a any widget clickable there are two methods:
                     //1.wrap it with justerdetector (no animation)
                     //2.wrap it wiht inkwell (animated)
                     Material(
-                      color: Colors.deepPurple,
+                      color: context.theme.buttonColor,
+                      // Colors.deepPurple,
                       borderRadius:
                           BorderRadius.circular(changeButton ? 50 : 8),
                       child: InkWell(

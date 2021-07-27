@@ -13,12 +13,17 @@ class HomeDetailPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        title: Text(catalog!.name),
-      ),
-      backgroundColor: MyTheme.creamColor,
+          backgroundColor: Colors.transparent,
+          title: "${catalog!.name}".text.color(context.accentColor).make()
+          // Text(
+          //   catalog!.name,
+          // ),
+          ),
+      backgroundColor: context.theme.canvasColor,
       bottomNavigationBar: Container(
-        color: Colors.white,
+        color:
+            // Colors.white,
+            context.cardColor,
         child: ButtonBar(
           alignment: MainAxisAlignment.spaceBetween,
           buttonPadding: Vx.m0,
@@ -28,8 +33,10 @@ class HomeDetailPage extends StatelessWidget {
                     onPressed: () {},
                     style: ButtonStyle(
                       // elevation: MaterialStateProperty.all(0),
-                      backgroundColor:
-                          MaterialStateProperty.all(MyTheme.darkBluishColor),
+                      backgroundColor: MaterialStateProperty.all(
+                        context.theme.buttonColor,
+                        // MyTheme.darkBluishColor,
+                      ),
                       shape: MaterialStateProperty.all(
                         StadiumBorder(),
                       ),
@@ -40,29 +47,37 @@ class HomeDetailPage extends StatelessWidget {
         ).p32(),
       ),
       body: SafeArea(
-        bottom: false //removes safe area from bottom
+        bottom:
+            false //removes safe area from bottom ,this will merge the colors and other things of the app with the bottom nav bar too
         ,
         child: Column(
           children: [
-            Hero(
+            Hero //we are applying hero/shared animation to our product image only thiss wii add animation with the product image only
+                (
               tag: Key(catalog!.id
                   .toString()), //We have to give same tag to connect this
               child: Image.network(catalog!.image),
             ).h32(context),
-            Expanded(
+            Expanded //Creates a widget that expands a child of a [Row], [Column], or [Flex] so that the child fills the available space along the flex widget's main axis.
+                (
               child: VxArc //container type thing with arc
                   (
                 height: 30.0,
                 arcType: VxArcType.CONVEY,
                 edge: VxEdge.TOP,
                 child: Container(
-                  color: Colors.white,
+                  color:
+                      // Colors.white,
+                      context.cardColor,
                   width: context.screenWidth,
                   child: SingleChildScrollView(
                     child: Column(
                       children: [
                         catalog!.name.text.xl4
-                            .color(MyTheme.darkBluishColor)
+                            .color(
+                              context.accentColor,
+                              // MyTheme.darkBluishColor,
+                            )
                             .bold
                             .make(),
 
