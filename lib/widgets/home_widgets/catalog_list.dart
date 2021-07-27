@@ -91,6 +91,8 @@ class Cataloglist extends StatelessWidget {
       itemCount: CatalogModel.items!.length,
       itemBuilder: (context, index) {
         final catalog = CatalogModel.items![index];
+        //or
+        // final catalog = CatalogModel.getByPostion(index);
         return InkWell(
           //using navigator.push doesnt require us to define the route in main.dart/route and also we can pass argument in navigator to other page
 

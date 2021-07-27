@@ -15,6 +15,18 @@ class CatalogModel {
   //       "https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/iphone-12-pro-blue-hero?wid=940&hei=1112&fmt=png-alpha&qlt=80&.v=1604021661000",
   // )
   // ];
+
+  //for cart functioning
+  //get item by ID
+  //REMEMBER:
+  // Item.getById(int id) => ();//This is a named constructor
+  // Item getById(int id) =>(); //This is a class function or in flutter u can say a 'method' which return a Item (our item model class)
+  static Item getById(int id) =>
+      items!.firstWhere((element) => element.id == id, orElse: null);
+  //firstwhere : Returns the first element that satisfies the given
+
+  //Get item by postion
+  static Item getByPostion(int pos) => items![pos];
 }
 
 //Item model

@@ -21,9 +21,7 @@ class HomeDetailPage extends StatelessWidget {
           ),
       backgroundColor: context.theme.canvasColor,
       bottomNavigationBar: Container(
-        color:
-            // Colors.white,
-            context.cardColor,
+        color: context.cardColor,
         child: ButtonBar(
           alignment: MainAxisAlignment.spaceBetween,
           buttonPadding: Vx.m0,

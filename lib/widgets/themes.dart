@@ -19,6 +19,7 @@ class MyTheme {
           iconTheme: IconThemeData(color: Colors.black),
           textTheme: Theme.of(context)
               .textTheme //We can use theme.of(context) to use texttheme of app in our widgets
+          //Here we are using the default text theme which is color:black,etc
           ,
         ),
         // cardTheme: CardTheme(color: Colors.amber, shape: StadiumBorder())
@@ -37,7 +38,11 @@ class MyTheme {
         color: Colors.black,
         elevation: 0.0,
         iconTheme: IconThemeData(color: Colors.white),
-        textTheme: Theme.of(context).textTheme,
+        textTheme: Theme.of(context).textTheme.copyWith(
+              headline6:
+                  context.textTheme.headline6!.copyWith(color: Colors.white),
+            ) //This is a experimental thing (refer master flutter in hust 8 hrs,timestamp:6:23:03),texttheme for app bar is overlapping with any headline6 theme (flutter deafult's) so we have copied the same headline6 text theme with a change in textcolor specifically so that that rest of our texttheme remains same
+        ,
       ));
 
   static Color creamColor = Color(0xfff5f5f5);
