@@ -21,12 +21,15 @@ class CatalogModel {
   //REMEMBER:
   // Item.getById(int id) => ();//This is a named constructor
   // Item getById(int id) =>(); //This is a class function or in flutter u can say a 'method' which return a Item (our item model class)
-  static Item getById(int id) =>
+
+  // static
+  Item getById(int id) =>
       items!.firstWhere((element) => element.id == id, orElse: null);
   //firstwhere : Returns the first element that satisfies the given
 
   //Get item by postion
-  static Item getByPostion(int pos) => items![pos];
+  // static
+  Item getByPostion(int pos) => items![pos];
 }
 
 //Item model
