@@ -92,14 +92,23 @@ class Cataloglist extends StatelessWidget {
               // final catalog = CatalogModel.getByPostion(index);
               return InkWell(
                 //using navigator.push doesnt require us to define the route in main.dart/route and also we can pass argument in navigator to other page
-                onTap: () => Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => HomeDetailPage(
-                        catalog:
-                            catalog), //we have to pass catalog as we have  show details of many products,therfore using Navigator.push instead pf Navigator.pushnamed
-                  ),
-                ),
+                //navigator 2.0
+                onTap: () => context.vxNav.push(
+                  Uri(
+                      path: MyRoutes.homeDetailsRoute,
+                      queryParameters: {"id": catalog.id.toString()}),
+                  params: catalog,
+                )
+                //navigator 1.0
+                // Navigator.push(
+                //   context,
+                //   MaterialPageRoute(
+                //     builder: (context) => HomeDetailPage(
+                //          catalog:
+                //             catalog), //we have to pass catalog as we have  show details of many products,therfore using Navigator.push instead pf Navigator.pushnamed
+                //   ),
+                // )
+                ,
                 child: CatalogItem(catalog: catalog),
               ); //this is how named argumet.optional argument is passed
             },

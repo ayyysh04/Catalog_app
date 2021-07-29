@@ -31,7 +31,8 @@ class _LoginPageState extends State<
 
       //await will make it wait for that durataion and also to make await work the function should be async in which it is used
       await Future.delayed(Duration(seconds: 1));
-      await Navigator.pushNamed(context, MyRoutes.homeRoute);
+      // await Navigator.pushNamed(context, MyRoutes.homeRoute);
+      await context.vxNav.push(Uri.parse(MyRoutes.homeRoute)); //navigator 2.0
       setState(() {
         changeButton = false;
       });
@@ -43,7 +44,7 @@ class _LoginPageState extends State<
     return Material(
       color: context.canvasColor,
       // Colors.white,
-      //To avoid bottom overflow use singlechildscrollView widget over coloumn widget/any other widget
+      //To avoid bottom overflow use singlechildscrollView widget over coloumn widget/any other widget.(Function of singlechildscrollview:Creates a box in which a single widget can be scrolled.)
       child: SingleChildScrollView(
         child: Form //Form is used to group the input things like username ,password,address,etc and allow us to validate that using a key
             //This form can be wrap over any widget inside which there is a textformfield or a textfield
@@ -79,16 +80,21 @@ class _LoginPageState extends State<
                     //Here textformfield is also a statefull widget as it is extend to stateful widget(ctrl+click on it to see)
                     //This means every widget can maintain its own state (statefull/stateless)
                     //This result in overall speeed improvement in app as if we make full app statefull then every thing will be created again and agian on that few change which are not even nessary
+                    //  TextField( ) :text field and textformfield are similar but in textformfield we can validate the text
                     TextFormField(
                         decoration: InputDecoration(
-                            hintText: "Enter username", labelText: "Username"),
+                          hintText: "Enter username",
+                          labelText: "Username",
+                        ),
                         validator: (value) {
                           if (value == null || value.isEmpty) {
                             return "Username cannot be empty";
                           }
                           return null;
                         },
-                        onChanged: (value) {
+                        onChanged:
+                            (value) //Whenever the text changes, the callback is invoked and the value of the text also get returned in fnc
+                            {
                           name = value;
                           setState(
                               () {}); //This setstate call this build function again when user input/on change and redraws the screen
