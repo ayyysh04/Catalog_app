@@ -58,17 +58,17 @@ class CartModel {
 
 //For fucntioning of add to cart and remove buttons
 //Add Item
-  void add(Item? item) {
-    _itemIds.add(item!
-        .id); //.add() will add this item id to our itemids list when clicked on the button
-  }
+  // void add(Item? item) {
+  //   _itemIds.add(item!
+  //       .id); //.add() will add this item id to our itemids list when clicked on the button
+  // }
 
 //Remove item
 
-  void remove(Item? item) {
-    _itemIds.remove(item!
-        .id); //.remove() will remove this item id from our itemids list when clicked on the button
-  }
+  // void remove(Item? item) {
+  //   _itemIds.remove(item!
+  //       .id); //.remove() will remove this item id from our itemids list when clicked on the button
+  // }
 }
 
 //Mutations is basically actions i.e the action we preform(like clicking a button,etc) is called mutution
@@ -76,7 +76,7 @@ class CartModel {
 
 // class AddMutation extends VxMutation
 class AddMutation extends VxMutation<
-    Mystore> //use <mystore> tp access the mystore direcly rather than using store as Mystore
+    Mystore> //use <mystore> i.e (class AddMutation extends VxMutation<Mystore>) to access the mystore direcly rather than using store as Mystore
 {
   final Item? item;
 

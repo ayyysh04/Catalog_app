@@ -3,11 +3,14 @@ import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_catalog/core/store.dart';
+import 'package:flutter_catalog/models/cart.dart';
 import 'package:flutter_catalog/models/catalog.dart';
 import 'package:flutter_catalog/utils/routes.dart';
 import 'package:flutter_catalog/widgets/home_widgets/catalog_header.dart';
 import 'package:flutter_catalog/widgets/home_widgets/catalog_list.dart';
 import 'package:velocity_x/velocity_x.dart';
+import 'package:http/http.dart' as http;
 
 class HomePage extends StatefulWidget {
   @override
@@ -15,6 +18,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  final url = "https://api.jsonbin.io/b/604dbddb683e7e079c4eefd3";
   //Every widget has its own lifecycle
 //  statfull class gives a state class
 
@@ -28,12 +32,16 @@ class _HomePageState extends State<HomePage> {
 
   loadData() async //retries json file  from assests/files
   {
-    await Future.delayed(Duration(
-        seconds:
-            5)); //used to examine real life problem as getting data from json take time and running listview with null list as it gives error
+    //NOW WE ARE USING HTTP TO GET DATA JSON FROM URL THIS WILL NOT BE NEEDED AS THIS IS OUR TESTING DELAY FOR REAL WORLD PROBLEMS
+    // await Future.delayed(Duration(seconds:5));
+    //used to examine real life problem as getting data from json take time and running listview with null list as it gives error
     //rootbundle : to extraxt the json files
-    final catalogJson =
-        await rootBundle.loadString("assets/files/catalog.json");
+    // final catalogJson = await rootBundle.loadString("assets/files/catalog.json");
+    //---------------------
+    //Getting data from http
+    final response = await http.get(Uri.parse(url));
+    final catalogJson = response.body;
+    //---------------------
     //This catalogJson we get is string but we want it as object
     //we have make this await beacuse loadstring return a future <string> means it takes time to extract the json files
 
@@ -60,6 +68,7 @@ class _HomePageState extends State<HomePage> {
 //hot restart - calls full program and to call initstate we have to do this
   @override
   Widget build(BuildContext context) {
+    final _cart = (VxState.store as Mystore).cart;
     // final dummylist = List.generate(25,(index) => CatalogModel.items[0]); //This will generate adummylist of type item[0]
     //Used to see how if there were many items will see
     return Scaffold(
@@ -69,20 +78,34 @@ class _HomePageState extends State<HomePage> {
         //MyTheme.darkTheme(context).cardColor //This is also same as above but here we can only use dark theme context when we switch to light theme it will not get used
 
         // MyTheme.creamColor,
-        floatingActionButton: FloatingActionButton(
-          onPressed: () {
-            Navigator.pushNamed(
-                context,
-                MyRoutes
-                    .cartRoute); //using navigator.pushname requires us to define the route in main.dart/route and demerit we cannot pass argument in navigator to other page (alternate: use navigatir.push())
+        floatingActionButton: VxBuilder(
+          builder: (context, store, VxStatus? status) {
+            return VxBadge(
+              textStyle: TextStyle(
+                color: Colors.black,
+                fontWeight: FontWeight.bold,
+              ),
+              color: Vx.red500,
+              size: 22.0,
+              count: _cart!.items.length,
+              child: FloatingActionButton(
+                onPressed: () {
+                  Navigator.pushNamed(
+                      context,
+                      MyRoutes
+                          .cartRoute); //using navigator.pushname requires us to define the route in main.dart/route and demerit we cannot pass argument in navigator to other page (alternate: use navigatir.push())
+                },
+                child: Icon(
+                  CupertinoIcons.cart,
+                  color: Colors.white,
+                ),
+                backgroundColor: context.theme.buttonColor,
+                // MyTheme.darkTheme(context).buttonColor,//same as context.theme.buttonColor (velocityx syntax)
+                // MyTheme.darkBluishColor,
+              ),
+            );
           },
-          child: Icon(
-            CupertinoIcons.cart,
-            color: Colors.white,
-          ),
-          backgroundColor: context.theme.buttonColor,
-          // MyTheme.darkTheme(context).buttonColor,//same as context.theme.buttonColor (velocityx syntax)
-          // MyTheme.darkBluishColor,
+          mutations: {AddMutation, RemoveMutation},
         ),
         // appBar: AppBar(
         //   // backgroundColor: Colors.white,
