@@ -19,9 +19,13 @@ class CatalogImage extends StatelessWidget {
             )
             .make()
             .p16()
-            .w40(
-              context,
-            ) //whalf make the width equal to the half of the screen it refrence to context
+            .wPCT(
+              context: context,
+              widthPCT: context.isMobile ? 40 : 20,
+            )
+        // .w40(
+        //   context,
+        // ) //whalf make the width equal to the half of the screen it refrence to context
         ;
   }
 }
