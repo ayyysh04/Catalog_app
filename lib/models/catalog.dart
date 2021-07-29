@@ -3,9 +3,9 @@ import 'dart:convert';
 //Hard coded Values of item
 class CatalogModel {
   //Made our class singleton so that our classes object.instance doesnt madde evrytime
-  static final catModel = CatalogModel._internal();
-  CatalogModel._internal();
-  factory CatalogModel() => catModel;
+  // static final catModel = CatalogModel._internal();
+  // CatalogModel._internal();
+  // factory CatalogModel() => catModel;
 
   static List<Item>? items;
   // [

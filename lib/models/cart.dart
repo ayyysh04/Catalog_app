@@ -1,10 +1,12 @@
+import 'package:flutter_catalog/core/store.dart';
 import 'package:flutter_catalog/models/catalog.dart';
+import 'package:velocity_x/velocity_x.dart';
 
 class CartModel {
   //Made our class singleton so that our classes object.instance doesnt madde evrytime
-  static final cartModel = CartModel._internal();
-  CartModel._internal();
-  factory CartModel() => cartModel;
+  // static final cartModel = CartModel._internal();
+  // CartModel._internal();
+  // factory CartModel() => cartModel;
 
   //catalog field
   CatalogModel? _catalog;
@@ -66,5 +68,34 @@ class CartModel {
   void remove(Item? item) {
     _itemIds.remove(item!
         .id); //.remove() will remove this item id from our itemids list when clicked on the button
+  }
+}
+
+//Mutations is basically actions i.e the action we preform(like clicking a button,etc) is called mutution
+//Mutation class for Vxstate
+
+// class AddMutation extends VxMutation
+class AddMutation extends VxMutation<
+    Mystore> //use <mystore> tp access the mystore direcly rather than using store as Mystore
+{
+  final Item? item;
+
+//constructor
+  AddMutation(this.item);
+
+  @override
+  perform() {
+    store!.cart!._itemIds.add(item!.id);
+  }
+}
+
+class RemoveMutation extends VxMutation<Mystore> {
+  final Item? item;
+
+  RemoveMutation(this.item);
+
+  @override
+  perform() {
+    store!.cart!._itemIds.remove(item!.id);
   }
 }

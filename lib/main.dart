@@ -1,14 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_catalog/core/store.dart';
 import 'package:flutter_catalog/pages/cart_page.dart';
 import 'package:flutter_catalog/pages/home_page.dart';
 import 'package:flutter_catalog/pages/login_page.dart';
 import 'package:flutter_catalog/utils/routes.dart';
 import 'package:flutter_catalog/widgets/themes.dart';
-import 'package:google_fonts/google_fonts.dart';
+import 'package:velocity_x/velocity_x.dart';
 
 void main() {
   //main fnc which is called first
-  runApp(MyApp()); //runapp fnc which calls and create MyApp object
+  runApp(
+    VxState(
+      store: Mystore(),
+      child: MyApp(),
+    ),
+  ); //runapp fnc which calls and create MyApp object
 }
 
 //fnction inside a class is called method
