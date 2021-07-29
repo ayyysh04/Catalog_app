@@ -33,6 +33,7 @@ class _LoginPageState extends State<
       await Future.delayed(Duration(seconds: 1));
       // await Navigator.pushNamed(context, MyRoutes.homeRoute);
       await context.vxNav.push(Uri.parse(MyRoutes.homeRoute)); //navigator 2.0
+      //Here it takes uri in .push() ,so we will parse our route to uri using uri.parse
       setState(() {
         changeButton = false;
       });

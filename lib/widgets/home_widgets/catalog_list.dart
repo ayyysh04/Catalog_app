@@ -93,12 +93,18 @@ class Cataloglist extends StatelessWidget {
               return InkWell(
                 //using navigator.push doesnt require us to define the route in main.dart/route and also we can pass argument in navigator to other page
                 //navigator 2.0
+                //Here it takes uri in .push() ,so we will parse our route to uri using uri.parse
                 onTap: () => context.vxNav.push(
                   Uri(
                       path: MyRoutes.homeDetailsRoute,
                       queryParameters: {"id": catalog.id.toString()}),
                   params: catalog,
                 )
+                //queryParameters:Query parameters are a defined set of parameters attached to the end of a url. They are extensions of the URL that are used to help define specific content or actions based on the data being passed.
+                //here we need to pass some parameter so we will use params to pass out catalog which then out Vxnav will navigate to that catalog item
+                //params : shortform of parameter
+
+                //---------------------
                 //navigator 1.0
                 // Navigator.push(
                 //   context,

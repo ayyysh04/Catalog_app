@@ -32,20 +32,27 @@ class MyApp extends StatelessWidget {
   //context specifies the location of our each widgets as there are storedd like tree/inside one in another
   {
     // return MaterialApp //we have to return an app (materialapp,cupertino app,widget app) before doing anything
+    //------------------
     //using navigator 2.0
     return MaterialApp.router(
       routeInformationParser: VxInformationParser(),
       routerDelegate: VxNavigator(
         routes: {
-          "/": (_, __) => MaterialPage(child: LoginPage()),
+          "/": (_, __) =>
+              MaterialPage(child: LoginPage()), //_ : means no argument getting
           "/login": (_, __) => MaterialPage(child: new LoginPage()),
           MyRoutes.homeRoute: (_, __) => MaterialPage(child: HomePage()),
-          MyRoutes.homeDetailsRoute: (uri, _) //params shortform of parameter
-              {
+          MyRoutes.homeDetailsRoute:
+              (uri, //param//params shortform of parameter:here we will get the catalog as parameter from the .push(param:catalog)
+                  //This is creting a url with link same for all products, to fix this we will pass the uri only and get the catalog (item) of the catalog item clicked by using getitembyid fnc(parsing the uri["id"]) and then we will give to the parameter catalog
+                  _) {
+            //here we will get the
             final catalog = (VxState.store as Mystore)
                 .catalog!
                 .getById(int.parse(uri.queryParameters["id"].toString()));
-            return MaterialPage(child: HomeDetailPage(catalog: catalog));
+            return MaterialPage(
+              child: HomeDetailPage(catalog: catalog),
+            );
           },
           MyRoutes.loginRoute: (_, __) => MaterialPage(child: LoginPage()),
           MyRoutes.cartRoute: (_, __) => MaterialPage(child: CartPage()),
