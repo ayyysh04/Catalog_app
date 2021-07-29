@@ -90,10 +90,8 @@ class _HomePageState extends State<HomePage> {
               count: _cart!.items.length,
               child: FloatingActionButton(
                 onPressed: () {
-                  Navigator.pushNamed(
-                      context,
-                      MyRoutes
-                          .cartRoute); //using navigator.pushname requires us to define the route in main.dart/route and demerit we cannot pass argument in navigator to other page (alternate: use navigatir.push())
+                  context.vxNav.push(Uri.parse(MyRoutes.cartRoute));
+                  // Navigator.pushNamed(context,MyRoutes.cartRoute); //using navigator.pushname requires us to define the route in main.dart/route and demerit we cannot pass argument in navigator to other page (alternate: use navigatir.push())
                 },
                 child: Icon(
                   CupertinoIcons.cart,
