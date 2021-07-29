@@ -40,7 +40,7 @@ class _CartTotal extends StatelessWidget {
     // final _cart = CartModel();
     final CartModel? _cart = (VxState.store as Mystore)
         .cart; //Now we dont need to make a seprate cartmodel like in above commented case ,Here we can directly take it from MyStore using Vxstate
-
+    // VxState.watch(context, on: [RemoveMutation]); This will rebuild this whole class i.e whole widget tree which may reduce performance in big apps so we will use Vxconsumer or Vxbuilder or Vxnotifier
     return SizedBox(
       height: 200,
       child: Row(
@@ -48,8 +48,24 @@ class _CartTotal extends StatelessWidget {
             .spaceAround //Same as space between but there is spcae from edges too
         ,
         children: [
-          "\$${_cart!.totalprice}".text.xl5.color(context.accentColor).make(),
-          // "\$9999".text.xl5.color(context.accentColor).make(),//dummy value
+          // VxBuilder:A helper widget built on top of StreamBuilder to rebuild a small part of the screen after execution of given mutations.
+          // VxNotifier:A helper widget to get callbacks after execution of mutations. Useful for handling actions connected to context such as showing SnackBar or navigating to a route etc.
+          //VxConsumer:A helper widget which is nothing but a combination of VxBuilder and VxNotifier if you need both of them together. The only difference is that VxNotifier mutations are here notifications
+          VxConsumer(
+            builder: (context, store, _) {
+              return "\$${_cart!.totalprice}"
+                  .text
+                  .xl5
+                  .color(context.accentColor)
+                  .make();
+              // "\$9999".text.xl5.color(context.accentColor).make(),//dummy value
+            },
+            mutations: {RemoveMutation} //things which it will listen for
+            ,
+            notifications: {}
+            //listen for any notifications
+            ,
+          ),
           30.widthBox,
           ElevatedButton(
             onPressed: () {
@@ -80,6 +96,7 @@ class _CartList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    //NOTE:USE VXSTATE.WATCH WISELY AS IT REBUILD THE WHOLE WIDGET TREE I.E THE WHOLE CLASS_CARTLIST
     VxState.watch(context, on: [RemoveMutation]);
     // final _cart = CartModel();
     final CartModel? _cart = (VxState.store as Mystore)
