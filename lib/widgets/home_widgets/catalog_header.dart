@@ -1,3 +1,4 @@
+import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_catalog/widgets/themes.dart';
 import 'package:velocity_x/velocity_x.dart';
@@ -19,7 +20,20 @@ class CatalogHeader extends StatelessWidget {
                 // MyTheme.darkBluishColor
                 )
             .make(),
-        "Trending products".text.xl2.make(),
+        // ),
+        // "Trending products".text.xl2.make(),
+        SizedBox(
+          child: DefaultTextStyle(
+            style: TextStyle(fontSize: 24, color: context.theme.accentColor),
+            child: AnimatedTextKit(
+              repeatForever: true,
+              animatedTexts: [
+                TyperAnimatedText('Trending Products',
+                    speed: Duration(milliseconds: 200)),
+              ],
+            ),
+          ),
+        ).h(30)
       ],
     );
   }

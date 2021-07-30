@@ -32,6 +32,7 @@ dependencies:
   velocity_x: ^3.3.0
   url_strategy: ^0.2.0
   shimmer: ^2.0.0
+  animated_text_kit: ^4.2.1
 dev_dependencies:
   flutter_test:
     sdk: flutter
