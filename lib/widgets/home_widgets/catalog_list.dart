@@ -6,6 +6,7 @@ import 'package:flutter_catalog/utils/routes.dart';
 import 'package:flutter_catalog/widgets/home_widgets/add_to_cart.dart';
 import 'package:flutter_catalog/widgets/home_widgets/catalog_image.dart';
 import 'package:flutter_catalog/widgets/themes.dart';
+import 'package:shimmer/shimmer.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 // catalog item

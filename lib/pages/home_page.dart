@@ -234,7 +234,7 @@ class _HomePageState extends State<HomePage> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       CatalogHeader(),
-                      //In children and many others we can use if else directly
+                      // In children and many others we can use if else directly
                       if (CatalogModel.items != null &&
                           CatalogModel.items!.isNotEmpty)
                         Cataloglist()
@@ -242,9 +242,13 @@ class _HomePageState extends State<HomePage> {
                             .expand() //we are using velocityx syntax ,Ps.We can wrap this with expanded() widget
                       //As we areusing list in coloumn so Using an Expanded widget makes a child of a Row, Column, or Flex expand to fill the available space along the main axis
                       else
-                        CircularProgressIndicator()
-                            .centered()
-                            .expand(), //expand makes the widget to utlize full space thus center widget starts working without expand it will not get centered vertically
+                        VxShimmer(
+                          primaryColor: context.accentColor,
+                          child: "Loading...".text.xl4.bold.make(),
+                        ).centered().expand()
+                      // CircularProgressIndicator()
+                      //     .centered()
+                      //     .expand(), //expand makes the widget to utlize full space thus center widget starts working without expand it will not get centered vertically
                     ]),
               ).expand(),
             ],

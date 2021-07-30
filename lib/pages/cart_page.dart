@@ -42,7 +42,7 @@ class _CartTotal extends StatelessWidget {
         .cart; //Now we dont need to make a seprate cartmodel like in above commented case ,Here we can directly take it from MyStore using Vxstate
     // VxState.watch(context, on: [RemoveMutation]); This will rebuild this whole class i.e whole widget tree which may reduce performance in big apps so we will use Vxconsumer or Vxbuilder or Vxnotifier
     return SizedBox(
-      height: 200,
+      height: 100,
       child: Row(
         mainAxisAlignment: MainAxisAlignment
             .spaceAround //Same as space between but there is spcae from edges too
