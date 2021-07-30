@@ -33,6 +33,14 @@ dependencies:
   url_strategy: ^0.2.0
   shimmer: ^2.0.0
   animated_text_kit: ^4.2.1
+  flutter_native_splash: ^1.2.0
+
+flutter_native_splash:
+  color: "#ffffff"
+  image: assets/splash.png
+  android: true
+  ios: true
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

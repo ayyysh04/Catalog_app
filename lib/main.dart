@@ -73,6 +73,7 @@ class MyApp extends StatelessWidget {
       //For creating new pages in app
       // initialRoute: "/login", //This will make our first page/route login
       // routes: {
+      //"/" is also out intial route
       //   "/": (context) =>
       //       HomePage(), //=> is short hand of defining fnc with return Homepage()
       //   // "/login": (context) =>
