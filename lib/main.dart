@@ -11,6 +11,7 @@ import 'package:url_strategy/url_strategy.dart';
 
 void main() {
   //Removes the # in roor url in web mode
+  // Vx.setPathUrlStrategy(); same as below
   setPathUrlStrategy();
   //main fnc which is called first
   runApp(
@@ -39,7 +40,7 @@ class MyApp extends StatelessWidget {
       routerDelegate: VxNavigator(
         routes: {
           "/": (_, __) =>
-              MaterialPage(child: LoginPage()), //_ : means no argument getting
+              MaterialPage(child: HomePage()), //_ : means no argument getting
           "/login": (_, __) => MaterialPage(child: new LoginPage()),
           MyRoutes.homeRoute: (_, __) => MaterialPage(child: HomePage()),
           MyRoutes.homeDetailsRoute:

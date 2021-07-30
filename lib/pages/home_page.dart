@@ -7,6 +7,7 @@ import 'package:flutter_catalog/core/store.dart';
 import 'package:flutter_catalog/models/cart.dart';
 import 'package:flutter_catalog/models/catalog.dart';
 import 'package:flutter_catalog/utils/routes.dart';
+import 'package:flutter_catalog/widgets/drawer.dart';
 import 'package:flutter_catalog/widgets/home_widgets/catalog_header.dart';
 import 'package:flutter_catalog/widgets/home_widgets/catalog_list.dart';
 import 'package:velocity_x/velocity_x.dart';
@@ -33,7 +34,7 @@ class _HomePageState extends State<HomePage> {
   loadData() async //retries json file  from assests/files
   {
     //NOW WE ARE USING HTTP TO GET DATA JSON FROM URL THIS WILL NOT BE NEEDED AS THIS IS OUR TESTING DELAY FOR REAL WORLD PROBLEMS
-    // await Future.delayed(Duration(seconds:5));
+    // await Future.delayed(Duration(seconds: 5));
     //used to examine real life problem as getting data from json take time and running listview with null list as it gives error
     //rootbundle : to extraxt the json files
     // final catalogJson = await rootBundle.loadString("assets/files/catalog.json");
@@ -61,7 +62,10 @@ class _HomePageState extends State<HomePage> {
     // List.from(productData).map<Item>((item) {return Item.fromMap(item);}).toList();
 
     //reloads the data
-    setState(() {});
+    if (this.mounted) //reloads data when whole widget is build i.e mounted
+    {
+      setState(() {});
+    }
   }
 
 //Hot reload - calls only build method to redrwa the screen
@@ -106,116 +110,144 @@ class _HomePageState extends State<HomePage> {
           mutations: {AddMutation, RemoveMutation},
         ),
         // appBar: AppBar(
-        //   // backgroundColor: Colors.white,
-        //   // elevation: 0.0, //Removes the shadow below the appbar
-        //   // iconTheme: IconThemeData(color: Colors.black), //This makes all color ,styling,etc related to icons in appbar eg:drawer icon
-        //   ///We have made an seprate theme data in main.dart so that it can used everywhere in an easier manner
-        //   title: Text(
-        //     "Catalog App",
-        //     // style: TextStyle(color: Colors.black),
-        //   ),
+        // backgroundColor: Colors.white,
+        // elevation: 0.0, //Removes the shadow below the appbar
+        // iconTheme: IconThemeData(color: Colors.black), //This makes all color ,styling,etc related to icons in appbar eg:drawer icon
+        ///We have made an seprate theme data in main.dart so that it can used everywhere in an easier manner
+        // title: Text(
+        //   "Catalog App",
+        //   // style: TextStyle(color: Colors.black),
         // ),
+        // ),
+        // body:
+        //     // Center(
+        //     // // single widget inside wiget : child
+        //     ////multiple widget inside wiget : children ,eg:row,coloumn,listview
+        //     // child: Container(
+        //     //     child: Text("Welcome"),
+        //     //   ),
+        //     // ),
+        //     Padding(
+        //   padding: const EdgeInsets.all(16.0),
+        //   child: (CatalogModel.items != null && CatalogModel.items!.isNotEmpty)
+        // ?
+        //       //Using list view
+        //       //  ListView
+        //       //     .builder //create a list and only render the list which are on screen when u scroll down the rendering of rest items starts
+        //       //     (
+        //       //     itemCount: CatalogModel.items!.length,
+        //       //     itemBuilder: (context, index) => ItemWidget
+        //       //         //used short hand => instead of return
+        //       //         (
+        //       //       item: CatalogModel.items![index],
+        //       //     ),
+        //       //   )
+        //       //using grid view
+        //       GridView.builder(
+        //           //grid delegrate tels to builder that how many items should be there in row or coloumn
+        //           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+        //             //crossaxix: horizontal axis
+        //             //mainaxis : Vertical axis
+        //             crossAxisCount: 2,
+        //             mainAxisSpacing: 16,
+        //             crossAxisSpacing: 16,
+        //           ),
+
+        //           itemBuilder: (context, index) {
+        //             final item = CatalogModel.items![index];
+        //             return Card(
+        //               clipBehavior: Clip.antiAlias,
+        //               shape: RoundedRectangleBorder(
+        //                   borderRadius: BorderRadius.circular(10)),
+        //               child: GridTile(
+        //                   header: Container(
+        //                     child: Text(
+        //                       item.name,
+        //                       style: TextStyle(color: Colors.white),
+        //                     ),
+        //                     decoration: BoxDecoration(
+        //                       color: Colors.deepPurple,
+        //                     ),
+        //                     padding: const EdgeInsets.all(
+        //                         12), //constant :make easier for compiler as it doesnt make the padding set agian again
+        //                   ),
+        //                   child: Container(
+        //                     child: Image.network(
+        //                       item.image,
+        //                     ),
+        //                     // margin: EdgeInsets.all(16.0),
+        //                     padding: EdgeInsets.symmetric(
+        //                       vertical: 50,
+        //                     ),
+        //                   ),
+        //                   footer: Container(
+        //                     child: Text(
+        //                       "\$${item.price.toString()}",
+        //                       textAlign: TextAlign.center,
+        //                       style: TextStyle(color: Colors.white),
+        //                     ),
+        //                     decoration: BoxDecoration(
+        //                       color: Colors.black,
+        //                     ),
+        //                     padding: const EdgeInsets.all(
+        //                         12), //constant :make easier for compiler as it doesnt make the padding set agian again
+        //                   )),
+        //             );
+        //           },
+        //           itemCount: CatalogModel.items!.length,
+        //         )
+        //       : Center(child: CircularProgressIndicator()),
+        // ),
+        drawer: MyDrawer(),
         body:
-            //     // Center(
-            //     // // single widget inside wiget : child
-            //     ////multiple widget inside wiget : children ,eg:row,coloumn,listview
-            //     // child: Container(
-            //     //     child: Text("Welcome"),
-            //     //   ),
-            //     // ),
-            //     Padding(
-            //   padding: const EdgeInsets.all(16.0),
-            //   child: (CatalogModel.items != null && CatalogModel.items!.isNotEmpty)
-            // ?
-            //       //Using list view
-            //       //  ListView
-            //       //     .builder //create a list and only render the list which are on screen when u scroll down the rendering of rest items starts
-            //       //     (
-            //       //     itemCount: CatalogModel.items!.length,
-            //       //     itemBuilder: (context, index) => ItemWidget
-            //       //         //used short hand => instead of return
-            //       //         (
-            //       //       item: CatalogModel.items![index],
-            //       //     ),
-            //       //   )
-            //       //using grid view
-            //       GridView.builder(
-            //           //grid delegrate tels to builder that how many items should be there in row or coloumn
-            //           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-            //             //crossaxix: horizontal axis
-            //             //mainaxis : Vertical axis
-            //             crossAxisCount: 2,
-            //             mainAxisSpacing: 16,
-            //             crossAxisSpacing: 16,
-            //           ),
-
-            //           itemBuilder: (context, index) {
-            //             final item = CatalogModel.items![index];
-            //             return Card(
-            //               clipBehavior: Clip.antiAlias,
-            //               shape: RoundedRectangleBorder(
-            //                   borderRadius: BorderRadius.circular(10)),
-            //               child: GridTile(
-            //                   header: Container(
-            //                     child: Text(
-            //                       item.name,
-            //                       style: TextStyle(color: Colors.white),
-            //                     ),
-            //                     decoration: BoxDecoration(
-            //                       color: Colors.deepPurple,
-            //                     ),
-            //                     padding: const EdgeInsets.all(
-            //                         12), //constant :make easier for compiler as it doesnt make the padding set agian again
-            //                   ),
-            //                   child: Container(
-            //                     child: Image.network(
-            //                       item.image,
-            //                     ),
-            //                     // margin: EdgeInsets.all(16.0),
-            //                     padding: EdgeInsets.symmetric(
-            //                       vertical: 50,
-            //                     ),
-            //                   ),
-            //                   footer: Container(
-            //                     child: Text(
-            //                       "\$${item.price.toString()}",
-            //                       textAlign: TextAlign.center,
-            //                       style: TextStyle(color: Colors.white),
-            //                     ),
-            //                     decoration: BoxDecoration(
-            //                       color: Colors.black,
-            //                     ),
-            //                     padding: const EdgeInsets.all(
-            //                         12), //constant :make easier for compiler as it doesnt make the padding set agian again
-            //                   )),
-            //             );
-            //           },
-            //           itemCount: CatalogModel.items!.length,
-            //         )
-            //       : Center(child: CircularProgressIndicator()),
-            // ),
-            // drawer: MyDrawer(),
-
             //Using velocityx
             SafeArea //Safearea keeps everything inside safe area i.e away from system ui (notification bar wher time,battery other thongs are there & navigation buttons in vase of on display ones)
                 (
-          child: Container(
-            padding: Vx.m32, //same as EdgeInsets.all(32),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Builder(builder: (context)
+                  //Refer:https://www.reddit.com/r/FlutterDev/comments/7yma7y/how_do_you_open_a_drawer_in_a_scaffold_using_code/
+                  //The problem is because Scaffold.of(context) uses the InheritedWidget system of looking at the build context and searching up the hierarchy of that context to find the nearest instance of Scaffold. Your build method is the context and it is creating the Scaffold, so searching 'above it' will not find a Scaffold instance.
+                  //if your trying to access the scaffold (or any InheritedWidget) in the same context, then use a Key, otherwise you'll probably already be using another context, so your good, or use a Builder/LayoutBuilder/.. OtherBuilder to get a context.
+                  //Here you'll notice now the Scaffold.of(context) is using the context of the builder which its parent is the Scaffold. So it is found when the widget hierarchy is searched.
+                  {
+                return IconButton(
+                    onPressed: () {
+                      Scaffold.of(context).openDrawer();
+                    },
+                    icon: Icon(
+                      Icons.menu,
+                      size: 30.0,
+                    )).pOnly(
+                  top: 15,
+                  left: 15,
+                );
+              }),
+              Container(
+                padding: Vx.mOnly(
+                    left: 32,
+                    right: 32,
+                    bottom: 32), //same as EdgeInsets.all(32),
 
-            child:
-                Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-              CatalogHeader(),
-              //In children and many others we can use if else directly
-              if (CatalogModel.items != null && CatalogModel.items!.isNotEmpty)
-                Cataloglist()
-                    .py16()
-                    .expand() //we are using velocityx syntax ,Ps.We can wrap this with expanded() widget
-              //As we areusing list in coloumn so Using an Expanded widget makes a child of a Row, Column, or Flex expand to fill the available space along the main axis
-              else
-                CircularProgressIndicator()
-                    .centered()
-                    .expand(), //expand makes the widget to utlize full space thus center widget starts working without expand it will not get centered vertically
-            ]),
+                child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      CatalogHeader(),
+                      //In children and many others we can use if else directly
+                      if (CatalogModel.items != null &&
+                          CatalogModel.items!.isNotEmpty)
+                        Cataloglist()
+                            .py16()
+                            .expand() //we are using velocityx syntax ,Ps.We can wrap this with expanded() widget
+                      //As we areusing list in coloumn so Using an Expanded widget makes a child of a Row, Column, or Flex expand to fill the available space along the main axis
+                      else
+                        CircularProgressIndicator()
+                            .centered()
+                            .expand(), //expand makes the widget to utlize full space thus center widget starts working without expand it will not get centered vertically
+                    ]),
+              ).expand(),
+            ],
           ),
         ));
   }
