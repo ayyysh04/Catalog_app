@@ -49,7 +49,14 @@ class Item {
   final String image;
 
 //item constrcutor
-  Item(this.id, this.name, this.desc, this.price, this.color, this.image);
+  Item(
+    this.id,
+    this.name,
+    this.desc,
+    this.price,
+    this.color,
+    this.image,
+  );
 
 //We have created a custom constrcutor
 //This will sync our data to out item model
@@ -78,6 +85,7 @@ class Item {
   //     };
 
 //Below constructors are made using dart data class generator extention
+
   Item copyWith({
     int? id,
     String? name,

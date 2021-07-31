@@ -1,16 +1,13 @@
-import 'dart:convert';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_catalog/core/store.dart';
 import 'package:flutter_catalog/models/cart.dart';
-import 'package:flutter_catalog/models/catalog.dart';
+
 import 'package:flutter_catalog/pages/cart_page.dart';
 import 'package:flutter_catalog/pages/home.dart';
 import 'package:flutter_catalog/utils/routes.dart';
 import 'package:flutter_catalog/widgets/drawer.dart';
 import 'package:velocity_x/velocity_x.dart';
-import 'package:http/http.dart' as http;
 
 class HomePage extends StatefulWidget {
   @override
@@ -25,8 +22,6 @@ class _HomePageState extends State<HomePage> {
     CartPage(),
   ];
 
-  final url = "https://api.jsonbin.io/b/604dbddb683e7e079c4eefd3";
-
   void _onItemTapped(index) {
     setState(
       () {
@@ -37,57 +32,18 @@ class _HomePageState extends State<HomePage> {
 
   //Every widget has its own lifecycle
 //  statfull class gives a state class
-
   @override
   void initState() //initizer-initilize data to build before its gets called
   {
     super.initState();
-    loadData();
     //We cannot use this data diretly with our catalog class,so we have to first decode it
-  }
-
-  loadData() async //retries json file  from assests/files
-  {
-    //NOW WE ARE USING HTTP TO GET DATA JSON FROM URL THIS WILL NOT BE NEEDED AS THIS IS OUR TESTING DELAY FOR REAL WORLD PROBLEMS
-    // await Future.delayed(Duration(seconds: 5));
-    //used to examine real life problem as getting data from json take time and running listview with null list as it gives error
-    //rootbundle : to extraxt the json files
-    // final catalogJson = await rootBundle.loadString("assets/files/catalog.json");
-    //---------------------
-    //Getting data from http
-    final response = await http.get(Uri.parse(url));
-    final catalogJson = response.body;
-    //---------------------
-    //This catalogJson we get is string but we want it as object
-    //we have make this await beacuse rootbundle.loadstring/https.get return a future <string> means it takes time to extract the json files
-
-    //jsondecode- return dynamic value (map,etc) and decodes the encoded data catalogjson
-    final decodedData = jsonDecode(catalogJson);
-    // var encodedData = jsonEncode(decodedData);//This encoded the object data again to string
-
-    //Here the product data will be getting a list from product object
-    final productData = decodedData[
-        "products"]; //extract the product data from the whole json object as we dont have a products class to sync data with
-
-    //This will convert all the items into one list which is list of items
-    //This will get list from product data and map it using our constrcutor frommap and then it will get converted to list
-    CatalogModel.items =
-        List.from(productData).map<Item>((item) => Item.fromMap(item)).toList();
-    //OR
-    // List.from(productData).map<Item>((item) {return Item.fromMap(item);}).toList();
-
-    //reloads the data
-    if (this.mounted) //reloads data when whole widget is build i.e mounted
-    {
-      setState(() {});
-    }
   }
 
 //Hot reload - calls only build method to redrwa the screen
 //hot restart - calls full program and to call initstate we have to do this
-  void onTap() {
-    print("pop");
-  }
+  // void onTap() {
+  //   print("pop");
+  // }
 
   @override
   Widget build(BuildContext context) {
