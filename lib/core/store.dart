@@ -8,7 +8,7 @@ class Mystore extends VxStore {
   // CatalogModel catalog=CatalogModel();//initilzer experssion
   CatalogModel? catalog;
   CartModel? cart;
-//constructor ,We can define them initially like done in above comments too
+//constructor ,We can also define them initially like done in above comments too
   Mystore() {
     catalog = CatalogModel();
     cart = CartModel();

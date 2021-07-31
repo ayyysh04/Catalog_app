@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_catalog/core/store.dart';
 import 'package:flutter_catalog/models/cart.dart';
+import 'package:flutter_catalog/pages/button_Page.dart';
 
 import 'package:flutter_catalog/pages/cart_page.dart';
 import 'package:flutter_catalog/pages/home.dart';
@@ -21,8 +22,8 @@ class _HomePageState extends State<HomePage>
   // late TabController _tabController;
   int _selectedTab = 0;
   final _pageOptions = [
+    ButtonPage(),
     Home(),
-    CartPage(),
   ];
 
   void _onItemTapped(index) {
@@ -71,7 +72,7 @@ class _HomePageState extends State<HomePage>
         //MyTheme.darkTheme(context).cardColor //This is also same as above but here we can only use dark theme context when we switch to light theme it will not get used
 
         // MyTheme.creamColor,
-        floatingActionButton: VxBuilder(
+        floatingActionButton: VxBuilder<Mystore>(
           builder: (context, store, VxStatus? status) {
             return VxBadge(
               textStyle: TextStyle(
@@ -192,24 +193,24 @@ class _HomePageState extends State<HomePage>
           backgroundColor: Colors.transparent,
           //As tabbar comes below the apbar therefore bottom is used
           bottom: TabBar(
-              // controller: _tabController,
-              indicatorPadding: Vx.mSymmetric(h: 30, v: 0),
-              unselectedLabelColor: context.accentColor,
-              indicatorSize: TabBarIndicatorSize.tab,
-              indicator:
-                  BoxDecoration //decorated the the box of the tabindicator
-                      (
-                gradient: LinearGradient(
-                    colors: [Colors.redAccent, Colors.orangeAccent]),
-                borderRadius: BorderRadius.circular(10),
-                // color: Colors.red,//color of box ,works if gradient color is not given
+            // controller: _tabController,
+            indicatorPadding: Vx.mSymmetric(h: 30, v: 0),
+            unselectedLabelColor: context.accentColor,
+            indicatorSize: TabBarIndicatorSize.tab,
+            indicator: BoxDecoration //decorated the the box of the tabindicator
+                (
+              gradient: LinearGradient(
+                  colors: [Colors.redAccent, Colors.orangeAccent]),
+              borderRadius: BorderRadius.circular(10),
+              // color: Colors.red,//color of box ,works if gradient color is not given
+            ),
+            tabs: [
+              Tab(
+                child: "Home".text.center.bold.make(),
               ),
-              tabs: [
-                Tab(
-                  child: "Home".text.center.bold.make(),
-                ),
-                Tab(child: "Cart".text.center.bold.make()),
-              ]),
+              Tab(child: "Cart".text.center.bold.make()),
+            ],
+          ),
         ),
         bottomNavigationBar: BottomNavigationBar(
           elevation: 0.0,
@@ -241,6 +242,7 @@ class _HomePageState extends State<HomePage>
             // ),
 
             //For bottom Navbar
+
             _pageOptions[_selectedTab],
       ),
     );
