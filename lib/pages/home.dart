@@ -58,6 +58,7 @@ class _HomeState extends State<Home> {
   void initState() {
     super.initState();
     loadData();
+    //We cannot use this data diretly with our catalog class,so we have to first decode it
   }
 
   Widget build(BuildContext context) {

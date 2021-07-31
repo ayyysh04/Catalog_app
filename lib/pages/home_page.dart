@@ -14,8 +14,11 @@ class HomePage extends StatefulWidget {
   _HomePageState createState() => _HomePageState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _HomePageState extends State<HomePage>
+// with TickerProviderStateMixin //for tabcontroller
+{
   //Used for bottomNavigationBar
+  // late TabController _tabController;
   int _selectedTab = 0;
   final _pageOptions = [
     Home(),
@@ -36,7 +39,13 @@ class _HomePageState extends State<HomePage> {
   void initState() //initizer-initilize data to build before its gets called
   {
     super.initState();
-    //We cannot use this data diretly with our catalog class,so we have to first decode it
+    // _tabController = TabController(vsync: this, length: 2);//intilized the tab controller
+  }
+
+  @override
+  void dispose() {
+    // _tabController.dispose();//Disposes the tab controller when object is removed from tree completely
+    super.dispose();
   }
 
 //Hot reload - calls only build method to redrwa the screen
@@ -51,7 +60,7 @@ class _HomePageState extends State<HomePage> {
     // final dummylist = List.generate(25,(index) => CatalogModel.items[0]); //This will generate adummylist of type item[0]
     //Used to see how if there were many items will see
     return DefaultTabController //Creates a default tab controller for the given [child] widget.
-        //TabController can be used instead of defaulttabcontroller,Refer:https://flutter.dev/docs/cookbook/design/tabs
+        // TabController can be used instead of defaulttabcontroller,Refer:https://flutter.dev/docs/cookbook/design/tabs
         (
       length: 2 //No. of tabs
       ,
@@ -180,8 +189,10 @@ class _HomePageState extends State<HomePage> {
         // ),
         drawer: MyDrawer(),
         appBar: AppBar(
+          backgroundColor: Colors.transparent,
           //As tabbar comes below the apbar therefore bottom is used
           bottom: TabBar(
+              // controller: _tabController,
               indicatorPadding: Vx.mSymmetric(h: 30, v: 0),
               unselectedLabelColor: context.accentColor,
               indicatorSize: TabBarIndicatorSize.tab,
@@ -201,6 +212,7 @@ class _HomePageState extends State<HomePage> {
               ]),
         ),
         bottomNavigationBar: BottomNavigationBar(
+          elevation: 0.0,
           items: [
             BottomNavigationBarItem(
               label: "Home",
@@ -219,8 +231,9 @@ class _HomePageState extends State<HomePage> {
           currentIndex: _selectedTab,
         ),
         body:
-            //For Appbar tab
-            // TabBarView(
+            // For Appbar tab
+            //     TabBarView(
+            //   // controller: _tabController,
             //   children: [
             //     Home(),
             //     CartPage(),
