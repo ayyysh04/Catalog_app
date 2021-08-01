@@ -32,6 +32,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) //build is method which return a widget
   //context specifies the location of our each widgets as there are storedd like tree/inside one in another
   {
+    ThemeMode themeMode = (VxState.store as Mystore).themeMode!.themeMode;
+    VxState.watch(context, on: [ToogleTheme]);
     // return MaterialApp //we have to return an app (materialapp,cupertino app,widget app) before doing anything
     //------------------
     //using navigator 2.0
@@ -64,7 +66,7 @@ class MyApp extends StatelessWidget {
           false, //to disable debug symbol at corner (it will be automatically removed when app goes for production)
       //home: HomePage(),//home or root route of our app
       //"/" route and home: cant be used together as they are same
-      themeMode: ThemeMode.system,
+      themeMode: themeMode,
       theme: MyTheme.lightTheme(
           context), //Connects our whole app with light theme app data class
       darkTheme: MyTheme.darkTheme(

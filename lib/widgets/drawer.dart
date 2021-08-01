@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:flutter_catalog/core/store.dart';
+import 'package:flutter_catalog/widgets/themes.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 class MyDrawer extends StatelessWidget {
@@ -8,6 +10,8 @@ class MyDrawer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    MyTheme? myTheme = (VxState.store as Mystore).themeMode;
+    bool darkMode = false;
     final imageUrl = "https://ayyysh04.github.io/me.jpg";
     return Drawer(
       child: Container(
@@ -69,6 +73,19 @@ class MyDrawer extends StatelessWidget {
                         textScaleFactor: 1.2,
                         style: TextStyle(color: Colors.white),
                       ),
+                    ),
+                    SwitchListTile(
+                      tileColor: context.backgroundColor,
+                      title: "Dark Mode".text.make(),
+                      value: myTheme!.isDarkMode,
+                      onChanged: (value) async {
+                        Scaffold.of(context).openEndDrawer();
+                        await Future.delayed(Duration(
+                            milliseconds:
+                                300)); //Delaying the Toggling so that drawer closing animation is done
+                        //await and async should be used with future to work
+                        ToogleTheme(isOn: value);
+                      },
                     )
                   ],
                 )),

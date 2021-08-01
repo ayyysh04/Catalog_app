@@ -85,6 +85,7 @@ class AddMutation extends VxMutation<
 
   @override
   perform() {
+    // (store as Mystore).cart!._itemIds.remove(item!.id);//use if u dont extnd this class to VxMutation<Mstore>
     store!.cart!._itemIds.add(item!.id);
   }
 }

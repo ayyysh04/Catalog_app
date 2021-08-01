@@ -1,9 +1,23 @@
 //Manages all the theme of our app here
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:velocity_x/velocity_x.dart';
 
+import 'package:flutter_catalog/core/store.dart';
+
 class MyTheme {
+  ThemeMode themeMode = ThemeMode.system;
+  //Getter for getting the value
+  bool get isDarkMode {
+    if (themeMode == ThemeMode.system) {
+      final brightness = SchedulerBinding.instance!.window.platformBrightness;
+      return brightness == Brightness.dark;
+    } else {
+      return themeMode == ThemeMode.dark;
+    }
+  }
+
   static ThemeData lightTheme(BuildContext context) => ThemeData(
         primarySwatch: Colors.deepPurple,
         fontFamily: GoogleFonts.poppins().fontFamily,
@@ -52,3 +66,18 @@ class MyTheme {
   static Color darkBluishColor = Color(0xff403b58);
   static Color lightBluishColor = Vx.indigo500;
 }
+
+//This class is the mutation class + we have given a perform to change our thememode
+//This class is listened by our Vxstate.listener and also
+// used to toogle our thememode
+class ToogleTheme extends VxMutation<Mystore> {
+  bool isOn;
+  ToogleTheme({required this.isOn});
+
+  @override
+  perform() {
+    store!.themeMode!.themeMode = isOn ? ThemeMode.dark : ThemeMode.light;
+  }
+}
+
+//We can make a store themeMode in store.dart too with a getter 

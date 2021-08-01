@@ -72,7 +72,7 @@ class _HomePageState extends State<HomePage>
         //MyTheme.darkTheme(context).cardColor //This is also same as above but here we can only use dark theme context when we switch to light theme it will not get used
 
         // MyTheme.creamColor,
-        floatingActionButton: VxBuilder<Mystore>(
+        floatingActionButton: VxBuilder(
           builder: (context, store, VxStatus? status) {
             return VxBadge(
               textStyle: TextStyle(
@@ -83,6 +83,8 @@ class _HomePageState extends State<HomePage>
               size: 22.0,
               count: _cart!.items.length,
               child: FloatingActionButton(
+                heroTag:
+                    null, //When using navigation 2.0 on floating action button ,give hero tag null or make a make a floating action button on navigating page too.
                 onPressed: () {
                   context.vxNav.push(Uri.parse(MyRoutes.cartRoute));
                   // Navigator.pushNamed(context,MyRoutes.cartRoute); //using navigator.pushname requires us to define the route in main.dart/route and demerit we cannot pass argument in navigator to other page (alternate: use navigatir.push())
